@@ -1,0 +1,33 @@
+[
+	{
+		"name": "Random",
+		"algorithm": ".Random"
+	},
+
+	{
+		"name": "Recently Published",
+		"algorithm": ".MostRecent"
+	},
+
+	{
+		"name": "Most Popular",
+		"algorithm": ".MostPopular"
+	},
+
+	{
+		"name": "Recently Clicked",
+		"algorithm": ".RecentlyClicked"
+	},
+
+	{
+		"name": "Recently Popular",
+		"algorithm": ".RecentlyPopular",
+		"filterTime": 3600000
+	},
+
+	{
+		"name": "Co-Occurrence",
+		"algorithm": ".FastSessionCoOccurrence",
+		"wholeSession": false
+	}
+]

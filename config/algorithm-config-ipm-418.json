@@ -1,0 +1,273 @@
+[
+	{
+		"name": "Random",
+		"algorithm": ".Random"
+	},
+
+	{
+		"name": "Recently Published",
+		"algorithm": ".MostRecent"
+	},
+
+	{
+		"name": "Most Popular",
+		"algorithm": ".MostPopular"
+	},
+
+	{
+		"name": "Most Popular + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".MostPopular"
+		}
+	},
+
+	{
+		"name": "Most popular + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".MostPopular"
+		}
+	},
+
+	{
+		"name": "Recently Clicked",
+		"algorithm": ".RecentlyClicked"
+	},
+
+	{
+		"name": "Recently Popular",
+		"algorithm": ".RecentlyPopular",
+		"filterTime": 3600000
+	},
+
+	{
+		"name": "kNN",
+		"algorithm": ".KNNRecentSession",
+		"timeBased": false,
+		"filterNumber": 500,
+		"k": 9
+	},
+
+	{
+		"name": "kNN + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".KNNRecentSession",
+			"timeBased": false,
+			"filterNumber": 500,
+			"k": 9
+		}
+	},
+
+	{
+		"name": "kNN + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".KNNRecentSession",
+			"timeBased": false,
+			"filterNumber": 500,
+			"k": 9
+		}
+	},
+
+	{
+		"name": "Co-Occurrence",
+		"algorithm": ".FastSessionCoOccurrence",
+		"wholeSession": true
+	},
+
+	{
+		"name": "Co-Occurrence + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": true,
+		"mainStrategy": 
+		{
+			"algorithm": ".FastSessionCoOccurrence",
+			"wholeSession": true
+		}
+	},
+
+	{
+		"name": "Co-Occurrence + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": true,
+		"mainStrategy": 
+		{
+			"algorithm": ".FastSessionCoOccurrence",
+			"wholeSession": true
+		}
+	},
+
+	{
+		"name": "Sequential Pattern",
+		"algorithm": ".SequentialSubPatternAll"
+	},
+
+	{
+		"name": "Sequential Pattern + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".SequentialSubPatternAll"
+		}
+	},
+
+	{
+		"name": "Sequential Pattern + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".SequentialSubPatternAll"
+		}
+	},
+
+	{
+		"name": "Item-Item CF",
+		"algorithm": ".ItemItemCF",
+		"wholeSession": true,
+		"buffer": true,
+		"bufferSize": 1000
+	},
+
+	{
+		"name": "Item-Item CF + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".ItemItemCF",
+			"wholeSession": true,
+			"buffer": true,
+			"bufferSize": 1000
+		}
+	},
+
+	{
+		"name": "Item-Item CF + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".ItemItemCF",
+			"wholeSession": true,
+			"buffer": true,
+			"bufferSize": 1000
+		}
+	},
+
+	{
+		"name": "Keywords",
+		"algorithm": ".KeywordJaccard"
+	},
+
+	{
+		"name": "Keywords + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".KeywordJaccard",
+			"wholeSession": false
+		}
+	},
+
+	{
+		"name": "Keywords + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".KeywordJaccard",
+			"wholeSession": false
+		}
+	},
+
+	{
+		"name": "Lucene",
+		"algorithm": ".Lucene",
+		"content": "titleAndText",
+		"minScore": 10,
+		"wholeSession": false
+	},
+
+	{
+		"name": "Lucene + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".Lucene",
+			"content": "titleAndText",
+			"minScore": 10,
+			"wholeSession": false
+		}
+	},
+
+	{
+		"name": "Lucene + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".Lucene",
+			"content": "titleAndText",
+			"minScore": 10,
+			"wholeSession": false
+		}
+	},
+
+	{
+		"name": "BPR",
+		"algorithm": ".BPR",
+		"trainingInterval": 120
+	},
+
+	{
+		"name": "BPR + RC/PF",
+		"algorithm": ".RecentlyClickedPostFiltering",
+		"filterTime": 3600000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".BPR",
+			"trainingInterval": 120
+		}
+	},
+
+	{
+		"name": "BPR + R/PF",
+		"algorithm": ".RecencyPostFiltering",
+		"filterTime": 86400000,
+		"fallback": false,
+		"mainStrategy": 
+		{
+			"algorithm": ".BPR",
+			"trainingInterval": 120
+		}
+	}
+]
