@@ -21,7 +21,7 @@ incrementally from every click.
 
 1. Acquire item and click CSV input files (see below)
 2. Create algorithm and metric JSON config files (see below)
-3. Download the pre-compiled jar from the releases tab
+3. Download the pre-compiled jar from the [releases tab](https://github.com/mjugo/StreamingRec/releases/latest)
 4. Run with `java -jar StreamingRec.jar <parameters>`
     * Commonly, at least the following parameters should be used: 
     `java -jar StreamingRec.jar --items=<path_to_item_meta_data_file> --clicks=<path_to_click_data_file> --algorithm-config=<path_to_algorithm_json_config_file>`
@@ -84,7 +84,7 @@ The format of the JSON object representing the algorithm or metric is always the
 * algorithm: the qualified name of the algorithm class relative to the tudo.streamingrec.algorithms package
 * wholeSession: Is an additional parameter specific to this algorithm (Co-Occurrence)
     * "Additional parameters" are all parameters that the respective algorithm class offers via its setter methods. 
-To find out which parameters are offered by which algorithm, consult the javadoc from the releases tab
+To find out which parameters are offered by which algorithm, consult the javadoc from the [releases tab](https://github.com/mjugo/StreamingRec/releases/latest)
 
 
 ### Import and run in Eclipse 
