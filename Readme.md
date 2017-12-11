@@ -19,9 +19,9 @@ incrementally from every click.
 ## Running StreamingRec
 ### Run on the command line 
 
-1. Acquire item and click CSV input files (see below)
-2. Create algorithm and metric JSON config files (see below)
-3. Download the pre-compiled jar from the [releases tab](https://github.com/mjugo/StreamingRec/releases/latest)
+1. Download the pre-compiled jar from the [releases tab](https://github.com/mjugo/StreamingRec/releases/latest)
+2. Acquire item and click CSV input files (see below)
+3. Create algorithm and metric JSON config files (see below)
 4. Run with `java -jar StreamingRec.jar <parameters>`
     * Commonly, at least the following parameters should be used: 
     `java -jar StreamingRec.jar --items=<path_to_item_meta_data_file> --clicks=<path_to_click_data_file> --algorithm-config=<path_to_algorithm_json_config_file>`
