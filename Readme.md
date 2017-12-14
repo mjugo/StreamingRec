@@ -24,8 +24,9 @@ incrementally from every click.
 3. Create algorithm and metric JSON config files (see below)
 4. Run with `java -jar StreamingRec.jar <parameters>`
     * Commonly, at least the following parameters should be used: 
-    `java -jar StreamingRec.jar --items=<path_to_item_meta_data_file> --clicks=<path_to_click_data_file> --algorithm-config=<path_to_algorithm_json_config_file>`
+    `java -jar StreamingRec.jar --items=<path_to_item_meta_data_file> --clicks=<path_to_click_data_file> --algorithm-config=<path_to_algorithm_json_config_file> --metrics-config=<path_to_metrics_json_config_file> --session-inactivity-threshold`
     * For a full list and description of the available parameters, run with `-h`
+    * For systems with small RAM, adjusting the `--thread-count=<N>` parameter can help. By default, it is set to the number of available CPU cores - 1, but in general, less concurrent threads result in less RAM usage.  
 
 ### How to acquire input files (data sets)
 
