@@ -11,6 +11,7 @@ incrementally from every click.
 *  Recently Popular 
 *  Item-Item CF
 *  Co-Occurrence
+*  Sequential Patterns
 *  KNN
 *  Lucene
 *  BPR
@@ -110,12 +111,10 @@ is called. The final metric value shall be returned when the method `double getR
 In any case the value of the class attribute `k` shall be observed.
 
 ## Authors
-* Mozhgan Karimi
-* Michael Jugovac
-* Dietmar Jannach
+**Author names are redacted because a paper based on a more advanced version of this source code is currently under __blind__ review.**
 
 ## License
-Copyright \[2017\] \[Mozhgan Karimi, Michael Jugovac, Dietmar Jannach\]
+Copyright \[2017\] \[**Author names are redacted because a paper based on a more advanced version of this source code is currently under __blind__ review.**]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
