@@ -67,9 +67,6 @@ will be created that can be used in with StreamingRec. The intermediate input fi
 Algorithms and metrics are configured via JSON files, one for algorithms, one for metrics. 
 Each of the files contains a JSON array that is made up of one JSON object per algorithm/metric. 
 A general metrics configuration can be found in the project folder at `config/metrics-config.json`.
-The algorithm configurations used in the _Information Procession & Management_ paper (currently under review) can be found at`config/algorithm-config-ipm-418.json` (for Plista publisher ksta.de) and 
-`config/algorithm-config-ipm-43.json` (for Outbrain publisher 43). 
-Note that these algorithm configurations can take a long time to run. 
 For a quick test, a simple algorithm configuration is included at `config/algorithm-config-simple.json`.
 
 To configure algorithms or metrics manually, a new JSON config file can be created. 
