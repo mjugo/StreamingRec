@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.apache.commons.io.output.TeeOutputStream;
@@ -42,9 +43,10 @@ public class Util {
 	 * Combines the list of metrics that is given as a parameter into a set of statistical test results.
 	 * These results are then converted into a set of csv tables (one CSV table per metric).
 	 * @param metrics -
+	 * @param smirnov  -
 	 * @return a csv table of pairwise statistical test results in the form of p-values
 	 */
-	public static String executeStatisticalTests(List<HypothesisTestableMetric> metrics) {
+	public static String executeStatisticalTests(List<HypothesisTestableMetric> metrics, boolean smirnov) {
 		//intialize the output format
 		DecimalFormat df = new DecimalFormat("0.0000000");
 		df.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
@@ -81,7 +83,11 @@ public class Util {
 					if(!a1.equals(a2)){
 						try {
 							//calculate the actual t-statistic
-							sb.append(df.format(metricsByAlgo.get(a1).getTTestPValue(metricsByAlgo.get(a2))));
+							if(!smirnov){
+								sb.append(df.format(metricsByAlgo.get(a1).getTTestPValue(metricsByAlgo.get(a2))));
+							}else{
+								sb.append(df.format(metricsByAlgo.get(a1).getSmirnoffPValue(metricsByAlgo.get(a2))));
+							}
 						} catch (DimensionMismatchException ex) {
 							//this should not happen. it's paired t-test, 
 							//so every algorithms' result list needs to have the same length
@@ -217,6 +223,28 @@ public class Util {
 			output.add(entry.getKey());
 		}
 		return output;
+	}
+	
+	/**
+	 * Prints the ETA in ms into a human readable string.
+	 * 
+	 * @param millis -
+	 * @return a pretty-printed string that represents the ETA
+	 */
+	public static String printETA(long millis) {
+		long hours = TimeUnit.MILLISECONDS.toHours(millis);
+		millis -= TimeUnit.HOURS.toMillis(hours);
+		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+		millis -= TimeUnit.MINUTES.toMillis(minutes);
+		long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+		StringBuilder sb = new StringBuilder(64);
+		sb.append(String.format("%02d", hours));
+		sb.append(" h ");
+		sb.append(String.format("%02d", minutes));
+		sb.append(" m ");
+		sb.append(String.format("%02d", seconds));
+		sb.append(" s ");
+		return sb.toString();
 	}
 
 	/**

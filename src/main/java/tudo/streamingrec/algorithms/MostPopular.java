@@ -27,7 +27,7 @@ public class MostPopular extends Algorithm {
 		}
 	}
 	
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//return the items sorted by their click count
 		return (LongArrayList) Util.sortByValueAndGetKeys(clickCounter, false, new LongArrayList());
 	}

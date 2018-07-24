@@ -63,10 +63,10 @@ import tudo.streamingrec.util.Util;
 public class StreamingRec {
 	//the item input file
 	@Option(names = {"-i", "--items"}, paramLabel="<FILE>", description = "Path to the item input file in CSV format") 
-	private static String INPUT_FILENAME_ITEMS = "data/Items.csv";
+	private static String INPUT_FILENAME_ITEMS = "Items.csv";
 	//the click input file
 	@Option(names = {"-c", "--clicks"}, paramLabel="<FILE>", description = "Path to the clicks input file in CSV format") 
-	private static String INPUT_FILENAME_CLICKS =  "data/Clicks.csv";
+	private static String INPUT_FILENAME_CLICKS =  "Clicks.csv";
 	//are we using the "old" format, i.e., the inefficient format optimized only for plista?	
 	@Option(names = {"-f", "--old-format"}, description = "Uses the old click file format") 
 	private static boolean OLD_FILE_FORMAT = false; 
@@ -79,10 +79,6 @@ public class StreamingRec {
 	//the path to the algorithm json config file
 	@Option(names = {"-a", "--algorithm-config"}, paramLabel="<FILE>", description = "Path to the algorithm json config file")
 	private static String ALGORITHM_FILE_NAME = "config/algorithm-config-simple.json";
-	// if the next parameter is true -> consider an inactivity time threshold to
-	// separate sessions; otherwise: built a session from elements of the same day
-	@Option(names = {"-s", "--session-inactivity-threshold"}, description = "Uses a time-based session inactivity threshold to separate user sessions. Otherwise, all user events of one day represent one sessions.")
-	private static boolean SESSION_INACTIVITY_THRESHOLD = false;
 	//the time for the sessions inactivity threshold
 	@Option(names = {"-t", "--session-time-threshold"}, paramLabel="<VALUE>", description = "The idle time threshold for separating two user sessions in milliseconds.")
 	private static long SESSION_TIME_THRESHOLD = 1000 * 60 * 20;
@@ -128,7 +124,6 @@ public class StreamingRec {
 		//redirect the console output to a file
 		Util.redirectConsole();
 		//set the sessions extractor's session split thresholds
-		SessionExtractor.setSessionInactivityThreshold(SESSION_INACTIVITY_THRESHOLD);
 		SessionExtractor.setThresholdInMS(SESSION_TIME_THRESHOLD);
 
 		//create a human readable session threshold for the output
@@ -137,11 +132,7 @@ public class StreamingRec {
 		System.out.println(
 				"Input files: \"" + INPUT_FILENAME_ITEMS + "\" & \"" + INPUT_FILENAME_CLICKS + "\"");
 		System.out.println("Config files: \"" + ALGORITHM_FILE_NAME + "\" & \"" + METRICS_FILE_NAME + "\"");
-		if (SESSION_INACTIVITY_THRESHOLD) {
-			System.out.println("session Time Thresholds: \"" + timeThreshold + "\"");
-		} else {
-			System.out.println("sessions based on cut off at midnight");
-		}
+		System.out.println("session Time Thresholds: \"" + timeThreshold + "\"");
 		System.out.println("Session length filter: " + SESSION_LENGTH_FILTER);
 		System.out.println("Split threshold: " + SPLIT_THRESHOLD);
 		System.out.println();
@@ -265,7 +256,9 @@ public class StreamingRec {
 		List<Item> trainingItems = new ObjectArrayList<Item>();
 		List<Transaction> trainingTransactions = new ObjectArrayList<Transaction>();
 		Util.extractEventTypes(splitData.trainingData, trainingItems, trainingTransactions);
-
+		
+		long realTrainTime = trainingTransactions.get(trainingTransactions.size()-1).timestamp.getTime() - trainingTransactions.get(0).timestamp.getTime();
+		
 		// create algorithms
 		Map<String, Algorithm> algorithmsWithName = new Object2ObjectLinkedOpenHashMap<String, Algorithm>();
 		for (Algorithm alg : tmpAlgorithms) {
@@ -309,8 +302,14 @@ public class StreamingRec {
 		for (Transaction t : testTransactions) {
 			sessionExtractorforEvaluation.addClick(t);
 		}
+		long realTestTime = testTransactions.get(testTransactions.size()-1).timestamp.getTime() - testTransactions.get(0).timestamp.getTime();
 		//save some RAM
 		testTransactions = null;
+		
+		//Log the time window of the eval
+		System.out.println("The training time window is: " + Util.printETA(realTrainTime)); 
+		System.out.println("The test time window is: " + Util.printETA(realTestTime)); 
+
 
 		// test phase
 		int nextPercentage = 0;
@@ -355,11 +354,7 @@ public class StreamingRec {
 		System.out.println(
 				"Input files: \"" + INPUT_FILENAME_ITEMS + "\" & \"" + INPUT_FILENAME_CLICKS + "\"");
 		System.out.println("Config files: \"" + ALGORITHM_FILE_NAME + "\" & \"" + METRICS_FILE_NAME + "\"");
-		if (SESSION_INACTIVITY_THRESHOLD) {
-			System.out.println("session Time Thresholds: \"" + timeThreshold + "\"");
-		} else {
-			System.out.println("sessions based on cut off at midnight");
-		}
+		System.out.println("session Time Thresholds: \"" + timeThreshold + "\"");
 		System.out.println("Session length filter: " + SESSION_LENGTH_FILTER);
 		System.out.println("Split threshold: " + SPLIT_THRESHOLD);
 		System.out.println();
@@ -390,7 +385,7 @@ public class StreamingRec {
 			System.out.println();
 			System.out.println("---- STATISTICAL RESULTS ----");
 			System.out.println();
-			System.out.println(Util.executeStatisticalTests(statMetrics));
+			System.out.println(Util.executeStatisticalTests(statMetrics, true));
 		}		
 	}
 
@@ -513,15 +508,6 @@ public class StreamingRec {
 	 */
 	static String getAlgorithmFileName() {
 		return ALGORITHM_FILE_NAME;
-	}
-
-	/**
-	 * if the next parameter is true -> consider an inactivity time threshold to
-	 * separate sessions; otherwise: built a session from elements of the same day
-	 * @return the session Inactivity Threshold
-	 */
-	static boolean isSessionInactivityThreshold() {
-		return SESSION_INACTIVITY_THRESHOLD;
 	}
 
 	/**

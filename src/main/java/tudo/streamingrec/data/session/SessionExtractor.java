@@ -3,8 +3,6 @@ package tudo.streamingrec.data.session;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import tudo.streamingrec.data.Transaction;
@@ -17,7 +15,6 @@ import tudo.streamingrec.data.Transaction;
  *
  */
 public class SessionExtractor {
-	private static boolean sessionInactivityThreshold;
 	private static long thresholdInMS;
 
 	//the storage for the sessions
@@ -47,10 +44,8 @@ public class SessionExtractor {
 		// the last session from it.
 		List<List<Transaction>> sessionList = sessions.get(t.userId);
 		List<Transaction> lastSession = sessionList.get(sessionList.size() - 1);
-		if ((isSessionInactivityThreshold() && (t.timestamp.getTime()
-				- lastSession.get(lastSession.size() - 1).timestamp.getTime() <= getThresholdInMS()))
-				|| (!isSessionInactivityThreshold()
-						&& (DateUtils.isSameDay(lastSession.get(lastSession.size() - 1).timestamp, t.timestamp)))) {
+		if (t.timestamp.getTime()
+				- lastSession.get(lastSession.size() - 1).timestamp.getTime() <= getThresholdInMS()) {
 			// if the difference between the last click event of the last
 			// session
 			// and the current click is less than N milliseconds,
@@ -95,26 +90,6 @@ public class SessionExtractor {
 	 */
 	public Map<Long, List<List<Transaction>>> getSessionMap() {
 		return sessions;
-	}
-
-	/**
-	 * true = sessions are created based on the idle time between two events. 
-	 * The actual threshold that is used is {{@link #thresholdInMS}.
-	 * false = every user click in one day is assigned to the same session. 
-	 * @return if a session inactivity thereshold should be used
-	 */
-	public static boolean isSessionInactivityThreshold() {
-		return sessionInactivityThreshold;
-	}
-
-	/**
-	 * true = sessions are created based on the idle time between two events. 
-	 * The actual threshold that is used is {{@link #thresholdInMS}.
-	 * false = every user click in one day is assigned to the same session. 
-	 * @param sessionInactivityThreshold -
-	 */
-	public static void setSessionInactivityThreshold(boolean sessionInactivityThreshold) {
-		SessionExtractor.sessionInactivityThreshold = sessionInactivityThreshold;
 	}
 
 	/**

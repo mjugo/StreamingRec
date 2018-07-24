@@ -34,10 +34,10 @@ public class RecentlyClickedPostFiltering extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//filter out items that have not received at last one click in the last time frame
 		//first, retrieve the recommendation results of the underlying algorithm
-		LongArrayList rec = mainStrategy.recommend(clickData);
+		LongArrayList rec = mainStrategy.recommendInternal(clickData);
 		
 		//create lists of filtered items and retained items
 		LongArrayList filteredRec = new LongArrayList();

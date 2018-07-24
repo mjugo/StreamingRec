@@ -28,7 +28,7 @@ public class MostRecent extends Algorithm {
 		}
 	}
 
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//just return the already ordered list of articles
 		return mostRecentItems;
 	}

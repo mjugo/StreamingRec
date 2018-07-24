@@ -37,10 +37,10 @@ public class CategoryPostFiltering extends Algorithm{
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//filter the items that match with the current click's category
 		//first, retrieve the recommendation results from the underlying algorithm
-		LongArrayList allRec = mainStrategy.recommend(clickData);
+		LongArrayList allRec = mainStrategy.recommendInternal(clickData);
 		
 		//if we want to consider all categories from the items of the current session,
 		//create a hashset with all these item categories

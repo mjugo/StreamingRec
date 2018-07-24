@@ -23,7 +23,7 @@ public class SequentialSubPatternAll extends SequentialSubPattern {
 	//in the session from the current click?
 	protected boolean weight = false;
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		// create a score map
 		Map<Long, Double> score = new Long2DoubleOpenHashMap();
 		// iterate over the subpatterns of the session that end with the most

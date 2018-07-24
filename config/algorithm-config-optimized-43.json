@@ -1,0 +1,62 @@
+[
+	{
+		"name": "Random",
+		"algorithm": ".Random"
+	},
+
+	{
+		"name": "Recently Published",
+		"algorithm": ".MostRecent"
+	},
+
+	{
+		"name": "Most Popular",
+		"algorithm": ".MostPopular"
+	},
+	
+	{
+		"name": "Recently Clicked",
+		"algorithm": ".RecentlyClicked"
+	},
+	
+	{
+		"name": "Sequential Pattern",
+		"algorithm": ".SequentialSubPatternAll"
+	},
+	
+	{
+		"name": "Recently Popular",
+		"algorithm": ".RecentlyPopular",
+		"filterTime": 1200000
+	},
+
+	{
+		"name": "Co-Occurrence",
+		"algorithm": ".FastSessionCoOccurrence",
+		"wholeSession": false
+	},
+
+	{
+		"name": "Item-Item CF",
+		"algorithm": ".ItemItemCF",
+		"wholeSession": false,
+		"buffer": true,
+		"bufferSize": 10500
+	},
+	
+	{
+		"name": "kNN V",
+		"algorithm": ".KNearestNeighbor",
+		"filterNumber": 4500,
+		"k": 200,
+		"scoringMethod": "DecayVector"
+	},
+	
+	{
+		"name": "kNN J",
+		"algorithm": ".KNearestNeighbor",
+		"filterNumber": 500,
+		"k": 350,
+		"scoringMethod": "Jaccard"
+	}
+]

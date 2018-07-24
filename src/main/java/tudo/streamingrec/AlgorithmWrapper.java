@@ -14,8 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.lang3.time.StopWatch;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -30,6 +28,7 @@ import tudo.streamingrec.evaluation.metrics.HypothesisTestableMetric;
 import tudo.streamingrec.evaluation.metrics.Metric;
 import tudo.streamingrec.evaluation.metrics.Runtime;
 import tudo.streamingrec.evaluation.metrics.Runtime.Type;
+import tudo.streamingrec.util.Util;
 
 /**
  * A wrapper around the algorithm class that executes it in a thread
@@ -208,13 +207,9 @@ public class AlgorithmWrapper extends Thread {
 							+ StreamingRec.getInputFilenameClicks() + "\"");
 					output.println("#Config files: \"" + StreamingRec.getAlgorithmFileName() + "\" & \""
 							+ StreamingRec.getMetricsFileName() + "\"");
-					if (StreamingRec.isSessionInactivityThreshold()) {
-						Period period = new Period(StreamingRec.getSessionTimeThreshold());
-						String timeThreshold = ISOPeriodFormat.standard().print(period).replace("PT", "");
-						output.println("#session Time Thresholds: \"" + timeThreshold + "\"");
-					} else {
-						output.println("#sessions based on cut off at midnight");
-					}
+					Period period = new Period(StreamingRec.getSessionTimeThreshold());
+					String timeThreshold = ISOPeriodFormat.standard().print(period).replace("PT", "");
+					output.println("#session Time Thresholds: \"" + timeThreshold + "\"");
 					output.println("#Session length filter: " + StreamingRec.getSessionLengthFilter());
 					output.println("#Split threshold: " + StreamingRec.getSplitThreshold());
 					output.println("#");
@@ -303,34 +298,12 @@ public class AlgorithmWrapper extends Thread {
 				long elapsedMs = System.currentTimeMillis() - lastTimestamps.get(0);
 				int remainingMs = (int) ((nbOfAlgorithms * 100d - accProgress) * elapsedMs / cacheSize);
 				lastTimestamps.removeFirst();
-				System.out.print("ETA: " + printETA(remainingMs));
+				System.out.print("ETA: " + Util.printETA(remainingMs));
 			}
 
 			// print detailed
 			System.out.println(detailedProgress);
 		}
-	}
-
-	/**
-	 * Prints the ETA in ms into a human readable string.
-	 * 
-	 * @param millis -
-	 * @return a pretty-printed string that represents the ETA
-	 */
-	private static String printETA(long millis) {
-		long hours = TimeUnit.MILLISECONDS.toHours(millis);
-		millis -= TimeUnit.HOURS.toMillis(hours);
-		long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
-		millis -= TimeUnit.MINUTES.toMillis(minutes);
-		long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-		StringBuilder sb = new StringBuilder(64);
-		sb.append(String.format("%02d", hours));
-		sb.append(" h ");
-		sb.append(String.format("%02d", minutes));
-		sb.append(" m ");
-		sb.append(String.format("%02d", seconds));
-		sb.append(" s ");
-		return sb.toString();
 	}
 	
 

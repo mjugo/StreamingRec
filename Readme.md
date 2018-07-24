@@ -5,17 +5,27 @@ click, algorithms generate recommendation lists, which are then evaluated by com
 them with the next user clicks. Most of the algorithms are implemented so that they learn 
 incrementally from every click.
 
+## Research Paper
+This framework is described in detail in the following research paper:
+
+Michael Jugovac, Dietmar Jannach, and Mozhgan Karimi. 2018. StreamingRec: A Framework for Benchmarking Stream-based News Recommenders. In *Proceedings of the Twelfth ACM Conference on Recommender Systems (RecSys ’18), October 2–7, 2018, Vancouver, BC, Canada*. ACM, New York, NY, USA, 5 pages. https://doi.org/10.1145/3240323.3240384. *forthcoming*.
+
+A preprint is available on the author's [homepage](http://ls13-www.cs.tu-dortmund.de/homepage/team/jugovac.shtml). 
+
+If you are using StreamingRec in your paper, please cite the above-mentioned reference in your bibliography.
+
 ## Implemented recommendation algorithms
 *  Most Popular
-*  Recently published
+*  Recently Published
 *  Recently Popular 
+*  Recently Clicked
 *  Item-Item CF
 *  Co-Occurrence
-*  Sequential Patterns
-*  KNN
+*  k-Nearest Neighbor
+*  Sequential Pattern Mining
 *  Lucene
-*  BPR
-*  Keywords
+*  Keyword-based
+*  Baysian Personalized Ranking
 
 ## Running StreamingRec
 ### Run on the command line 
@@ -107,11 +117,8 @@ shall calculate, update, and store its current metric value every time the metho
 is called. The final metric value shall be returned when the method `double getResults()` is called. 
 In any case the value of the class attribute `k` shall be observed.
 
-## Authors
-**Author names are redacted because a paper based on a more advanced version of this source code is currently under __blind__ review.**
-
 ## License
-Copyright \[2017\] \[**Author names are redacted because a paper based on a more advanced version of this source code is currently under __blind__ review.**]
+Copyright \[2017,2018\] \[Mozhgan Karimi, Michael Jugovac, Dietmar Jannach]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

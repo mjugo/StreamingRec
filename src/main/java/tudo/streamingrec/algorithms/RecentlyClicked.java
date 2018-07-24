@@ -28,7 +28,7 @@ public class RecentlyClicked extends Algorithm{
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//return an array list copy of the ordered article ids
 		return new LongArrayList(clickedItems);
 	}

@@ -42,7 +42,7 @@ public class FastSessionCoOccurrence extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//create a list of scores for each item, which is the sum of all co-occurrence counts
 		Map<String, Double> combineWeights = new Object2DoubleOpenHashMap<String>();
 		//depending on if we are supposed to use the whole session or not,

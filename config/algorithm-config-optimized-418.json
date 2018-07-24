@@ -1,0 +1,85 @@
+[
+	{
+		"name": "Random",
+		"algorithm": ".Random"
+	},
+
+	{
+		"name": "Recently Published",
+		"algorithm": ".MostRecent"
+	},
+
+	{
+		"name": "Most Popular",
+		"algorithm": ".MostPopular"
+	},
+	
+	{
+		"name": "Recently Clicked",
+		"algorithm": ".RecentlyClicked"
+	},
+	
+	{
+		"name": "Sequential Pattern",
+		"algorithm": ".SequentialSubPatternAll"
+	},
+	
+	{
+		"name": "Recently Popular",
+		"algorithm": ".RecentlyPopular",
+		"filterTime": 2100000
+	},
+
+	{
+		"name": "Co-Occurrence",
+		"algorithm": ".FastSessionCoOccurrence",
+		"wholeSession": false
+	},
+
+	{
+		"name": "Item-Item CF",
+		"algorithm": ".ItemItemCF",
+		"wholeSession": false,
+		"buffer": true,
+		"bufferSize": 3500
+	},
+	
+	{
+		"name": "kNN V",
+		"algorithm": ".KNearestNeighbor",
+		"filterNumber": 3500,
+		"k": 150,
+		"scoringMethod": "DecayVector"
+	},
+	
+	{
+		"name": "kNN J",
+		"algorithm": ".KNearestNeighbor",
+		"filterNumber": 500,
+		"k": 500,
+		"scoringMethod": "Jaccard"
+	},
+	
+	{
+		"name": "BPR",
+		"algorithm": ".BPR",
+		"trainingInterval": 1440,
+		"numFeatures": 100,
+		"initialSteps": 50,
+		"learnRate": 0.26
+	},
+	
+	{
+		"name": "Keywords",
+		"algorithm": ".KeywordJaccard",
+		"wholeSession": false
+	},
+	
+	{
+		"name": "Lucene",
+		"algorithm": ".Lucene",
+		"content": "titleAndText",
+		"minScore": 11,
+		"wholeSession": false
+	}
+]

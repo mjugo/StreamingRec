@@ -34,10 +34,10 @@ public class PopularityPostFiltering extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//filter out items with low overall click counts
 		//first, retrieve the recommendation results of the underlying algorithm
-		LongArrayList rec = mainStrategy.recommend(clickData);
+		LongArrayList rec = mainStrategy.recommendInternal(clickData);
 		
 		//create lists of filtered items and retained items
 		LongArrayList filteredRec = new LongArrayList();

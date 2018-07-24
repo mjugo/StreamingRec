@@ -33,6 +33,10 @@ public class RetroactiveStatisticalTests {
 	@Parameters(index = "0", paramLabel="<FOLDER>", description = "The folder where the statistical evaluation output file were saved to.")
 	private static String folder = "stats/";
 	
+	//wilcoxon test instead of t-test?
+	@Option(names = {"-s", "--smirnov"}, description = "Uses a Kolmogorov Smirnov test instead of a paired t-test.")
+	private static boolean smirnov = false;
+	
 	//for command line help
 	@Option(names = {"-h", "--help"}, hidden=true, usageHelp = true)
 	private static boolean helpRequested;
@@ -75,6 +79,6 @@ public class RetroactiveStatisticalTests {
 		}
 		System.out.println("Starting tests");
 		//execute the statistical t-test and print to console
-		System.out.println(Util.executeStatisticalTests(metrics));
+		System.out.println(Util.executeStatisticalTests(metrics, smirnov));
 	}
 }

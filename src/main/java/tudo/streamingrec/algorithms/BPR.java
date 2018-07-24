@@ -470,7 +470,7 @@ public class BPR extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		// Calculate rating predictions for all items we know
 		Map<Long, Float> predictions = new HashMap<>();
 		float pred = Float.NaN;

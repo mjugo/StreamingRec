@@ -2,8 +2,8 @@ package tudo.streamingrec.evaluation.metrics;
 
 import java.io.Serializable;
 
+import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest;
 import org.apache.commons.math3.stat.inference.TTest;
-
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
@@ -30,5 +30,14 @@ public abstract class HypothesisTestableMetric extends Metric implements Seriali
 	 */
 	public double getTTestPValue(HypothesisTestableMetric otherAlgorithm){
 		return new TTest().pairedTTest(getDetailedResults().toDoubleArray(), otherAlgorithm.getDetailedResults().toDoubleArray());
+	}
+	
+	/**
+	 * Returns the result of a Kolmogorov Smirnov test 
+	 * @param otherAlgorithm -
+	 * @return the p-value result of a Kolmogorov Smirnov test.
+	 */
+	public double getSmirnoffPValue(HypothesisTestableMetric otherAlgorithm){
+		return new KolmogorovSmirnovTest().kolmogorovSmirnovTest(getDetailedResults().toDoubleArray(), otherAlgorithm.getDetailedResults().toDoubleArray());
 	}
 }

@@ -68,7 +68,7 @@ public class Lucene extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//create a result list
 		LongArrayList results = new LongArrayList();
 		try {

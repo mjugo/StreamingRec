@@ -67,7 +67,7 @@ public class KeywordJaccard extends Algorithm{
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//generate a list of item ids, from the current session, with which we want to compare
 		LongOpenHashSet itemIDsToCompare = new LongOpenHashSet();
 		if(wholeSession){

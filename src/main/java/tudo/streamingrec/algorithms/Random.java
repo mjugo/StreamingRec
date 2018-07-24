@@ -27,7 +27,7 @@ public class Random extends Algorithm{
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//create a result list and copy the known item ids there
 		LongArrayList recs = new LongArrayList(items);
 		//shuffle the result list and return it

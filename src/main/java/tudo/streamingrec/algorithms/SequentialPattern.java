@@ -30,7 +30,7 @@ public class SequentialPattern extends Algorithm {
 	}
 
 	@Override
-	public LongArrayList recommend(ClickData clickData) {
+	public LongArrayList recommendInternal(ClickData clickData) {
 		//step down the pattern tree to match the right pattern
 		SequenceTreeNode currentNode = patternTree;
 		for (Transaction click : clickData.session) {
